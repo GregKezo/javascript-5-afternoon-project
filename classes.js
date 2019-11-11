@@ -177,16 +177,10 @@ class Machine {
   }
 
   reboot() {
-      let wt = this.wear_and_tear_count
-      let nr = this.needs_reboot
-      function rebootComplete(wt, nr){
-        wt -= 10
-        nr = false
-        return wt, nr
-      }
-      rebootComplete(wt, nr)
-      return wt, nr
+    return () => {
+      this.wear_and_tear_count -= 10
+      this.needs_reboot = false
+      return this.wear_and_tear_count, this.needs_reboot
     }
-
   }
-
+}
